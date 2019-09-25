@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useReducer} from "react";
 import "./list.css"
 
 export const List = ({items = [],
@@ -8,60 +8,88 @@ export const List = ({items = [],
                              },
                              after: {
                                  include: true,
-                                 includeCallback: (i) => console.log("include", i)
+                                 includeCallback: (i) => console.log("include", i.title)
                              }}}) => {
-    console.log("controls1", controls);
+
+    const list = useList(items);
+
     return (
-        <ul className="list">
-            {items.map((item, i) =>
-                <ListItem key={i}
-                          title={item.title}
-                          children={item.children}
-                          hidden={item.hidden}
-                          controls={controls}
-                />)}
-        </ul>
+        <ListItems items={list.items} controls={controls} />
     )
 };
 
-export const ListItem = ({title = "Title", children = [],
-                             hidden = true, controls}) => {
-    console.log("controls2", controls);
+export const ListItems = ({items = [],
+                         controls = {
+                             before: {
+                                 expand: true
+                             },
+                             after: {
+                                 include: true,
+                                 includeCallback: (i) => console.log("include", i)
+                             }}}) => {
 
-    const [expand, setExpand] = useState(!hidden);
+    const list = useList(items);
+
+    return (
+            <ul className="list">
+                {list.items.map((item, i) =>
+                    <ListItem key={i} origin={item} controls={controls} />)}
+            </ul>
+    )
+};
+
+export const ListItem = ({controls, origin}) => {
+    const [item, setItem] = useState(origin);
+
+    function toggleExpand() {
+        setItem({...item, expanded: !item.expanded})
+    }
 
     return (
         <li>
             <Controls
+                item={item}
                 controls={controls.before}
-                hasChildren={children.length > 0}
-                expand={() => setExpand(!expand)}
+                toggleExpand={toggleExpand}
             />
-            <span style={{width:"300px"}}>{title}</span>
+            <span>{item.title}</span>
             <Controls
+                item={item}
                 controls={controls.after}
-                hasChildren={children.length > 0}
-                setExpand={() => setExpand(!expand)}
-                expand={expand}
+                toggleExpand={toggleExpand}
             />
-            {expand && <List items={children} />}
+            {console.log("render item hidden", item.hidden)}
+            {item.expanded && <ListItems items={item.children} controls={controls} />}
         </li>
     )
 };
 
-export const Controls = ({controls, hasChildren, setExpand, expand}) => {
-    console.log("controls3", controls);
-
+export const Controls = ({item, controls, toggleExpand}) => {
     return (
         <span>
-    {controls.include &&
-    <input type="checkbox" name="include"
-           onClick={() => controls.includeCallback("me")} />
-    }
-            {controls.expand && hasChildren &&
-            <button onClick={setExpand} disabled={!hasChildren}>
-                {expand ? "ᐃ" : "ᐁ"}
-            </button>
+            {controls.include &&
+                <input type="checkbox" name="include"
+                        onClick={() => controls.includeCallback(item)} />
+            }
+            {controls.expand && item.children && item.children.length > 0 &&
+                <button onClick={toggleExpand} >
+                    {item.hidden ? "ᐃ" : "ᐁ"}
+                </button>
             }
     </span>)
-}
+};
+
+export const useList = (init) => {
+    function itemsReducer(state, {action, data}) {
+        switch (action) {
+            case "reset": {
+                return init;
+            }
+            default:
+                return state;
+        }
+    }
+    const [items, modify] = useReducer(itemsReducer, init);
+
+    return {items, modify};
+};

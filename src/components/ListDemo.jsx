@@ -25,7 +25,7 @@ export const ListDemo = () => {
                     { title: '5 salølæsødlfæsød' },
                     { title: '6 Zzzsødlfæsød' },
                 ],
-            hidden: false
+            expanded: true
         },
         { title: 'Commune', children:
                 [
