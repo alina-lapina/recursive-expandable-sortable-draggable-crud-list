@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "../css/list.css"
+import "./list.css"
 
 export const List = ({items = [],
                          controls = {

@@ -1,6 +1,6 @@
 import React from "react";
-import "../css/list.css";
-import {List} from "./List";
+import "../modules/list/list.css";
+import {List} from "../modules/list/List";
 
 export const ListDemo = () => {
 
