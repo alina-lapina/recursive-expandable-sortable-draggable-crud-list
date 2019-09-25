@@ -78,7 +78,7 @@ export const ListItem = ({title = "Title", children = [], hidden = true}) => {
     return (
         <li>
             <span>{title}</span>
-            {children.length > 0 && <button onClick={() => setExpand(!expand)}>+</button>}
+            {children.length > 0 && <button onClick={() => setExpand(!expand)}>{expand ? "ᐃ" : "ᐁ"}</button>}
             {expand && <List items={children} />}
         </li>
     )
