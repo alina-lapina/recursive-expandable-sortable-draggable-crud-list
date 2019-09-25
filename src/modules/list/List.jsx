@@ -1,15 +1,15 @@
 import React, {useState, useReducer} from "react";
 import "./list.css"
 
-export const List = ({items = [],
+export const List = ({
+                         items = [],
                          controls = {
-                             before: {
-                                 expand: true
-                             },
-                             after: {
-                                 include: true,
-                                 includeCallback: (i) => console.log("include", i.title)
-                             }}}) => {
+                             expand: {
+                                 before: true},
+                             include: {
+                                 after: true,
+                                 includeCallback: (i) => console.log("include", i.title)}}
+                     }) => {
 
     const list = useList(items);
 
@@ -30,22 +30,27 @@ export const ListItems = ({items, controls}) => {
 export const ListItem = ({controls, origin}) => {
     const [item, setItem] = useState(origin);
 
-    function toggleExpand() {
+    controls.expand.toggleExpand = () => {
         setItem({...item, expanded: !item.expanded})
+    };
+
+    function filterControls(property) {
+        return Object.keys(controls).reduce((p, c) => {
+            if (controls[c][property]) p[c] = controls[c];
+            return p;
+        }, {})
     }
 
     return (
         <li>
             <Controls
                 item={item}
-                controls={controls.before}
-                toggleExpand={toggleExpand}
+                controls={filterControls("before")}
             />
             <span>{item.title}</span>
             <Controls
                 item={item}
-                controls={controls.after}
-                toggleExpand={toggleExpand}
+                controls={filterControls("after")}
             />
             {console.log("render item hidden", item.hidden)}
             {item.expanded && <ListItems items={item.children} controls={controls} />}
@@ -53,15 +58,16 @@ export const ListItem = ({controls, origin}) => {
     )
 };
 
-export const Controls = ({item, controls, toggleExpand}) => {
+export const Controls = ({item, controls = {}}) => {
+    console.log("controls", controls);
     return (
         <span>
             {controls.include &&
                 <input type="checkbox" name="include"
-                        onClick={() => controls.includeCallback(item)} />
+                        onClick={() => controls.include.includeCallback(item)} />
             }
             {controls.expand && item.children && item.children.length > 0 &&
-                <button onClick={toggleExpand} >
+                <button onClick={controls.expand.toggleExpand} >
                     {item.hidden ? "ᐃ" : "ᐁ"}
                 </button>
             }
