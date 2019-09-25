@@ -1,5 +1,6 @@
-
-import React, {useState} from "react";
+import React from "react";
+import "../modules/list/list.css";
+import {List} from "../modules/list/List";
 
 export const ListDemo = () => {
 
@@ -24,7 +25,7 @@ export const ListDemo = () => {
                     { title: '5 salølæsødlfæsød' },
                     { title: '6 Zzzsødlfæsød' },
                 ],
-            hidden: false
+            expanded: true
         },
         { title: 'Commune', children:
                 [
@@ -55,31 +56,4 @@ export const ListDemo = () => {
             <List items={listItems} />
         </div>
     );
-};
-
-
-export const List = ({items = []}) => {
-
-    return (
-        <ul>
-            {items.map((item, i) =>
-                <ListItem key={i}
-                          title={item.title}
-                          children={item.children}
-                          hidden={item.hidden}/>)}
-        </ul>
-    )
-};
-
-export const ListItem = ({title = "Title", children = [], hidden = true}) => {
-
-    const [expand, setExpand] = useState(!hidden);
-
-    return (
-        <li>
-            <span>{title}</span>
-            {children.length > 0 && <button onClick={() => setExpand(!expand)}>+</button>}
-            {expand && <List items={children} />}
-        </li>
-    )
 };
