@@ -1,0 +1,303 @@
+{
+  "name" : "Standard for kommuneinndeling",
+  "classificationType" : "Klassifikasjon",
+  "lastModified" : "2019-03-29T12:32:26.000+0000",
+  "description" : "Kommuneinndelingen er en administrativ inndeling av Norge. Kommunen er betegnelsen både på en politisk og forvaltningsmessig nivå og betegnelsen på et regionalt nivå i statistikken.",
+  "primaryLanguage" : "nb",
+  "copyrighted" : false,
+  "includeShortName" : false,
+  "includeNotes" : true,
+  "contactPerson" : {
+    "name" : "Bloch, Vilni Verner Holst",
+    "email" : "vilni.verner.holst.bloch@ssb.no",
+    "phone" : "40811418"
+  },
+  "owningSection" : "320 - Seksjon for befolkningsstatistikk ",
+  "statisticalUnits" : [ "Region" ],
+  "versions" : [ {
+    "name" : "Kommuneinndeling 2014-03",
+    "validFrom" : "2014-03-01",
+    "validTo" : "2014-06-01",
+    "lastModified" : "2017-06-19T11:04:27.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/472"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2013",
+    "validFrom" : "2013-01-01",
+    "validTo" : "2014-03-01",
+    "lastModified" : "2017-04-11T11:09:54.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/473"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2012",
+    "validFrom" : "2012-01-01",
+    "validTo" : "2013-01-01",
+    "lastModified" : "2017-06-19T09:40:41.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/474"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2008",
+    "validFrom" : "2008-01-01",
+    "validTo" : "2012-01-01",
+    "lastModified" : "2017-06-19T09:41:33.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/475"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2006",
+    "validFrom" : "2006-01-01",
+    "validTo" : "2008-01-01",
+    "lastModified" : "2017-06-19T09:42:22.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/476"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2005",
+    "validFrom" : "2005-01-01",
+    "validTo" : "2006-01-01",
+    "lastModified" : "2017-06-19T09:43:24.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/477"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2002-06",
+    "validFrom" : "2002-06-01",
+    "validTo" : "2004-01-01",
+    "lastModified" : "2017-04-11T10:48:18.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/478"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2002-01",
+    "validFrom" : "2002-01-01",
+    "validTo" : "2002-06-01",
+    "lastModified" : "2017-04-04T12:15:44.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/479"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2017-01",
+    "validFrom" : "2017-01-01",
+    "validTo" : "2017-04-01",
+    "lastModified" : "2017-06-19T11:09:57.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/536"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1994",
+    "validFrom" : "1994-01-01",
+    "validTo" : "2002-01-01",
+    "lastModified" : "2017-04-11T08:13:12.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/622"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1992-01",
+    "validFrom" : "1992-01-01",
+    "validTo" : "1992-05-01",
+    "lastModified" : "2017-04-06T06:46:12.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/623"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1992-05",
+    "validFrom" : "1992-05-01",
+    "validTo" : "1994-01-01",
+    "lastModified" : "2017-04-06T06:51:37.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/624"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1988",
+    "validFrom" : "1988-01-01",
+    "validTo" : "1989-04-01",
+    "lastModified" : "2017-04-06T08:15:40.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/625"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1989-04",
+    "validFrom" : "1989-04-01",
+    "validTo" : "1990-01-01",
+    "lastModified" : "2017-04-06T08:16:16.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/626"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 1990",
+    "validFrom" : "1990-01-01",
+    "validTo" : "1992-01-01",
+    "lastModified" : "2017-10-27T12:47:10.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/627"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2014-12",
+    "validFrom" : "2014-12-01",
+    "validTo" : "2016-04-01",
+    "lastModified" : "2017-06-19T11:07:34.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/628"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2016-04",
+    "validFrom" : "2016-04-01",
+    "validTo" : "2017-01-01",
+    "lastModified" : "2017-06-19T11:09:04.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/629"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2004",
+    "validFrom" : "2004-01-01",
+    "validTo" : "2005-01-01",
+    "lastModified" : "2017-04-11T10:59:59.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/630"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2014-06",
+    "validFrom" : "2014-06-01",
+    "validTo" : "2014-12-01",
+    "lastModified" : "2017-06-19T11:06:20.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/631"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2017-04",
+    "validFrom" : "2017-04-01",
+    "validTo" : "2018-01-01",
+    "lastModified" : "2018-01-02T07:32:24.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/636"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2018-01",
+    "validFrom" : "2018-01-01",
+    "validTo" : "2018-05-01",
+    "lastModified" : "2019-03-29T12:32:27.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/833"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2018-05",
+    "validFrom" : "2018-05-01",
+    "validTo" : "2019-01-01",
+    "lastModified" : "2019-01-03T08:59:50.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/1069"
+      }
+    }
+  }, {
+    "name" : "Kommuneinndeling 2019",
+    "validFrom" : "2019-01-01",
+    "lastModified" : "2019-01-03T09:04:57.000+0000",
+    "published" : [ "nb", "nn", "en" ],
+    "_links" : {
+      "self" : {
+        "href" : "http://data.ssb.no/api/klass/v1/versions/1102"
+      }
+    }
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131"
+    },
+    "codes" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/codes{?from=<yyyy-MM-dd>,to=<yyyy-MM-dd>,csvSeparator,level,selectCodes,presentationNamePattern}",
+      "templated" : true
+    },
+    "codesAt" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/codesAt{?date=<yyyy-MM-dd>,csvSeparator,level,selectCodes,presentationNamePattern}",
+      "templated" : true
+    },
+    "variant" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/variant{?variantName,from=<yyyy-MM-dd>,to=<yyyy-MM-dd>,csvSeparator,level,selectCodes,presentationNamePattern}",
+      "templated" : true
+    },
+    "variantAt" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/variantAt{?variantName,date=<yyyy-MM-dd>,csvSeparator,level,selectCodes,presentationNamePattern}",
+      "templated" : true
+    },
+    "corresponds" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/corresponds{?targetClassificationId,from=<yyyy-MM-dd>,to=<yyyy-MM-dd>,csvSeparator}",
+      "templated" : true
+    },
+    "correspondsAt" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/correspondsAt{?targetClassificationId,date=<yyyy-MM-dd>,csvSeparator}",
+      "templated" : true
+    },
+    "changes" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/131/changes{?from=<yyyy-MM-dd>,to=<yyyy-MM-dd>,csvSeparator}",
+      "templated" : true
+    }
+  }
+}

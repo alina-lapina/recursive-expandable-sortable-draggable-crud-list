@@ -1,0 +1,209 @@
+{
+  "_embedded" : {
+    "classifications" : [ {
+      "name" : "Standard for delområde- og grunnkretsinndeling",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-08-21T14:04:08.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/1"
+        }
+      }
+    }, {
+      "name" : "Standard for kjønn",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2018-12-07T14:02:33.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/2"
+        }
+      }
+    }, {
+      "name" : "Standard for gruppering av hjelpe- og omsorgstiltak i barnevernet",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-07T12:05:23.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/3"
+        }
+      }
+    }, {
+      "name" : "Standard for regionale spesialkoder",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-03-12T08:58:44.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/4"
+        }
+      }
+    }, {
+      "name" : "Standard for PRODCOM koder",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-02-28T08:50:04.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/5"
+        }
+      }
+    }, {
+      "name" : "Standard for næringsgruppering (SN)",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-08-21T08:48:31.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/6"
+        }
+      }
+    }, {
+      "name" : "Standard for yrkesklassifisering",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-08-13T10:43:14.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/7"
+        }
+      }
+    }, {
+      "name" : "Standard for overføringskapasiteter for internettabonnement",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2017-01-11T09:38:45.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/8"
+        }
+      }
+    }, {
+      "name" : "Standard for transport av farlig gods på vei",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2017-02-01T07:15:58.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/9"
+        }
+      }
+    }, {
+      "name" : "Standard for vareslag i transportstatistikken",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2017-03-14T14:52:55.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/10"
+        }
+      }
+    }, {
+      "name" : "Standard for havnedistrikt",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-01-22T11:48:41.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/11"
+        }
+      }
+    }, {
+      "name" : "Standard for skadegrad",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-07T12:06:17.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/12"
+        }
+      }
+    }, {
+      "name" : "Standard for trafikanttype",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-07T12:06:17.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/13"
+        }
+      }
+    }, {
+      "name" : "Standard for veitrafikkulykke",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-07T12:06:17.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/14"
+        }
+      }
+    }, {
+      "name" : "Standard for SSBs emneinndeling",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-07T12:06:17.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/15"
+        }
+      }
+    }, {
+      "name" : "Standard for distriktsinndeling av ordrereserve i bygg og anlegg",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2017-09-26T10:34:54.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/16"
+        }
+      }
+    }, {
+      "name" : "Standard for gruppering av familier",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-03-12T14:03:12.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/17"
+        }
+      }
+    }, {
+      "name" : "Standard for oppvarmingskilde",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2016-10-13T08:07:43.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/18"
+        }
+      }
+    }, {
+      "name" : "Standard for sivilstand",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2019-06-04T08:37:54.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/19"
+        }
+      }
+    }, {
+      "name" : "Standard for grunnbeløpet i folketrygden (beløp pr. 1.5 )",
+      "classificationType" : "Klassifikasjon",
+      "lastModified" : "2018-05-25T07:27:31.000+0000",
+      "_links" : {
+        "self" : {
+          "href" : "http://data.ssb.no/api/klass/v1/classifications/20"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "first" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications.json?page=0&size=20"
+    },
+    "self" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications.json"
+    },
+    "next" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications.json?page=1&size=20"
+    },
+    "last" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications.json?page=6&size=20"
+    },
+    "search" : {
+      "href" : "http://data.ssb.no/api/klass/v1/classifications/search{?query,includeCodelists}",
+      "templated" : true
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 127,
+    "totalPages" : 7,
+    "number" : 0
+  }
+}
