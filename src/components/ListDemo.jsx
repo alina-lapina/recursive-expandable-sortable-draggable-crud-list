@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useState} from "react";
 
 export const ListDemo = () => {
 
@@ -25,7 +25,28 @@ export const ListDemo = () => {
                     { title: '6 Zzzsødlfæsød' },
                 ],
             hidden: false
-        }
+        },
+        { title: 'Commune', children:
+                [
+                    { title: 'I dfg' },
+                    { title: 'II xfdggfh' },
+                    { title: 'III xczzpppsk' },
+                    { title: 'IV dfgs 1233' },
+                    { title: 'V salæsød' },
+                    { title: 'VI salølæsø' },
+                    { title: 'VII aalokdk' },
+                    { title: 'VIII domdomd', children:
+                            [
+                                { title: 'A dfg' },
+                                { title: 'B xfdggfh' },
+                                { title: 'C xc' },
+                                { title: 'D dfgs' },
+                                { title: 'E salølæsødlfæsød' },
+                            ]},
+                    { title: 'IX Pjfklsvnnn' },
+                    { title: 'X AKOKO' },
+                ]
+        },
     ];
 
     return (
@@ -39,7 +60,8 @@ export const ListDemo = () => {
 
 export const List = ({items = []}) => {
 
-    return (<ul>
+    return (
+        <ul>
             {items.map((item, i) =>
                 <ListItem key={i}
                           title={item.title}
@@ -50,10 +72,14 @@ export const List = ({items = []}) => {
 };
 
 export const ListItem = ({title = "Title", children = [], hidden = true}) => {
+
+    const [expand, setExpand] = useState(!hidden);
+
     return (
         <li>
-            <h4>{title}</h4>
-            {!hidden && <List items={children} />}
+            <span>{title}</span>
+            {children.length > 0 && <button onClick={() => setExpand(!expand)}>+</button>}
+            {expand && <List items={children} />}
         </li>
     )
 };
