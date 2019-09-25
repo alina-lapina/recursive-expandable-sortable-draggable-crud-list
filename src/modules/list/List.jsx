@@ -18,21 +18,10 @@ export const List = ({items = [],
     )
 };
 
-export const ListItems = ({items = [],
-                         controls = {
-                             before: {
-                                 expand: true
-                             },
-                             after: {
-                                 include: true,
-                                 includeCallback: (i) => console.log("include", i)
-                             }}}) => {
-
-    const list = useList(items);
-
+export const ListItems = ({items, controls}) => {
     return (
             <ul className="list">
-                {list.items.map((item, i) =>
+                {items.map((item, i) =>
                     <ListItem key={i} origin={item} controls={controls} />)}
             </ul>
     )
