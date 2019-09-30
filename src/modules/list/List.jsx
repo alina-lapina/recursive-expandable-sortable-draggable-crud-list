@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useEffect} from "react";
+import React, {useReducer, useEffect} from "react";
 import "./list.css"
 
 export const List = ({
@@ -17,18 +17,17 @@ export const List = ({
     return (
             <ul className="list">
                 {list.items.map((item, i) =>
-                    <ListItem key={i} origin={item}
-                              modifier={list.modify}
+                    <ListItem key={i} id={i} item={item}
+                              modify={list.modify}
                               controls={controls} />)
                 }
             </ul>
     )
 };
 
-export const ListItem = ({controls, origin, modifier}) => {
+export const ListItem = ({id, controls, item, modify}) => {
 
-    const state = useItem(origin);
-    useEffect(() => console.log({ item_update: state.item }),[state.item]);
+    item.id=id;
 
     function filterControls(property) {
         return Object.keys(controls).reduce((p, c) => {
@@ -40,32 +39,34 @@ export const ListItem = ({controls, origin, modifier}) => {
     return (
         <li>
             <Controls
-                state={state}
+                item={item}
+                modify={modify}
                 controls={filterControls("before")}
             />
-            <span>{state.item.title}</span>
+            <span>{item.title}</span>
             <Controls
-                state={state}
+                item={item}
+                modify={modify}
                 controls={filterControls("after")}
             />
-            {state.item.expanded && <List items={state.item.children} controls={controls} />}
+            {item.expanded && <List items={item.children} controls={controls} />}
         </li>
     )
 };
 
-export const Controls = ({state, controls}) => {
+export const Controls = ({item, modify, controls}) => {
     return (
         <span>
             {controls.include &&
-                <input type="checkbox" name="include" checked={state.item.checked}
+                <input type="checkbox" name="include" checked={item.checked}
                        onChange={() => {
-                            state.modify({action: "toggleChecked"});
-                            controls.include.callback(state.item);
+                            modify({action: "toggleChecked", data: item.id});
+                            controls.include.callback(item);
                         }} />
             }
-            {controls.expand && state.item.children && state.item.children.length > 0 &&
-                <button onClick={() => state.modify({action: "toggleExpand"})}>
-                    {state.item.expanded ? "ᐃ" : "ᐁ"}
+            {controls.expand && item.children && item.children.length > 0 &&
+                <button onClick={() => modify({action: "toggleExpand", data: item.id})}>
+                    {item.expanded ? "ᐃ" : "ᐁ"}
                 </button>
             }
     </span>)
