@@ -1,33 +1,23 @@
-import React, {useReducer, useEffect} from "react";
+import React, {useState, useReducer, useEffect} from "react";
 import "./list.css"
 
-export const List = ({
-                         items = [],
+export const List = ({items = [],
                          controls = {
-                             expand: {
-                                 before: true},
-                             include: {
-                                 after: true,
+                             expand: {before: true},
+                             include: {after: true,
                                  callback: (i) => console.log("include", i.title)}}
                      }) => {
 
-    const list = useList(items);
-    useEffect(() => console.log({ list_update: list.items }),[list.items]);
-
     return (
-            <ul className="list">
-                {list.items.map((item, i) =>
-                    <ListItem key={i} id={i} item={item}
-                              modify={list.modify}
-                              controls={controls} />)
-                }
-            </ul>
+        <ul className="list">
+            {items.map((item, i) =>
+                <ListItem key={i} item={item} controls={controls} />)}
+        </ul>
     )
 };
 
-export const ListItem = ({id, controls, item, modify}) => {
-
-    item.id=id;
+export const ListItem = ({controls, item}) => {
+    const [state, setState] = useState(item);
 
     function filterControls(property) {
         return Object.keys(controls).reduce((p, c) => {
@@ -39,35 +29,39 @@ export const ListItem = ({id, controls, item, modify}) => {
     return (
         <li>
             <Controls
-                item={item}
-                modify={modify}
+                state={state}
+                setState={(i)=> setState(i)}
                 controls={filterControls("before")}
             />
             <span>{item.title}</span>
             <Controls
-                item={item}
-                modify={modify}
+                state={state}
+                setState={(i)=> setState(i)}
                 controls={filterControls("after")}
             />
-            {item.expanded && <List items={item.children} controls={controls} />}
+            {state.expanded && <List items={item.children} controls={controls} />}
         </li>
     )
 };
 
-export const Controls = ({item, modify, controls}) => {
+export const Controls = ({state, setState, controls}) => {
     return (
         <span>
-            {controls.include &&
-                <input type="checkbox" name="include" checked={item.checked}
-                       onChange={() => {
-                            modify({action: "toggleChecked", data: item.id});
-                            controls.include.callback(item);
-                        }} />
+            {controls.expand && state.children && state.children.length > 0 &&
+            <button onClick={() => {
+                state.expanded = !state.expanded;
+                setState({...state});}}>
+                {state.expanded ? "ᐃ" : "ᐁ"}
+            </button>
             }
-            {controls.expand && item.children && item.children.length > 0 &&
-                <button onClick={() => modify({action: "toggleExpand", data: item.id})}>
-                    {item.expanded ? "ᐃ" : "ᐁ"}
-                </button>
+
+            {controls.include &&
+            <input type="checkbox" name="include" checked={state.checked}
+                   onChange={() => {
+                       state.checked = !state.checked;
+                       setState({...state});
+                       controls.include.callback(state);
+                   }} />
             }
     </span>)
 };
@@ -79,11 +73,11 @@ export const useList = (init) => {
                 return init;
             }
             case "toggleExpand": {
-                state[data].expanded = !state[data].expanded;
+                data.expanded = !data.expanded;
                 return [...state];
             }
             case "toggleChecked": {
-                state[data].checked = !state[data].checked;
+                data.checked = !data.checked;
                 return [...state];
             }
             default:
