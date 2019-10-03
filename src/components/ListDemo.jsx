@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "../modules/list/list.css";
 import {List} from "../modules/list/List";
 
 export const ListDemo = () => {
-
-    //useEffect(() => console.log({ newState: chosen }),[chosen]);
 
     const listItems = [
         { title: 'Arbeid', children:
@@ -53,8 +51,8 @@ export const ListDemo = () => {
     return (
         <div className="page">
             <h3>List demo</h3>
-            <List items={listItems} />
-            <button onClick={() => console.log("update", listItems)}>Show data</button>
+            <List listitems={listItems} />
+            <button onClick={() => console.log("current state", listItems)}>Show data</button>
         </div>
     );
 };

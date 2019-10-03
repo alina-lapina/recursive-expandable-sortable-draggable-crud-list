@@ -1,23 +1,25 @@
-import React, {useState, useReducer, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "./list.css"
 
-export const List = ({items = [],
+export const List = ({listitems = [],
                          controls = {
                              expand: {before: true},
                              include: {after: true,
                                  callback: (i) => console.log("include", i.title)}}
                      }) => {
 
+    const [items, setItems] = useState(listitems);
+    useEffect(() => console.log({ list: items }),[items]);
+
     return (
         <ul className="list">
             {items.map((item, i) =>
-                <ListItem key={i} item={item} controls={controls} />)}
+                <ListItem key={i} item={item} controls={controls} setItems={()=> setItems([...items])} />)}
         </ul>
     )
 };
 
-export const ListItem = ({controls, item}) => {
-    const [state, setState] = useState(item);
+export const ListItem = ({controls, item, setItems}) => {
 
     function filterControls(property) {
         return Object.keys(controls).reduce((p, c) => {
@@ -29,83 +31,39 @@ export const ListItem = ({controls, item}) => {
     return (
         <li>
             <Controls
-                state={state}
-                setState={(i)=> setState(i)}
+                item={item}
+                setItems={(i)=> setItems(i)}
                 controls={filterControls("before")}
             />
             <span>{item.title}</span>
             <Controls
-                state={state}
-                setState={(i)=> setState(i)}
+                item={item}
+                setItems={(i)=> setItems(i)}
                 controls={filterControls("after")}
             />
-            {state.expanded && <List items={item.children} controls={controls} />}
+            {item.expanded && <List listitems={item.children} controls={controls} />}
         </li>
     )
 };
 
-export const Controls = ({state, setState, controls}) => {
+export const Controls = ({item, setItems, controls}) => {
     return (
         <span>
-            {controls.expand && state.children && state.children.length > 0 &&
+            {controls.expand && item.children && item.children.length > 0 &&
             <button onClick={() => {
-                state.expanded = !state.expanded;
-                setState({...state});}}>
-                {state.expanded ? "ᐃ" : "ᐁ"}
+                item.expanded = !item.expanded;
+                setItems();}}>
+                {item.expanded ? "ᐃ" : "ᐁ"}
             </button>
             }
 
             {controls.include &&
-            <input type="checkbox" name="include" checked={state.checked}
+            <input type="checkbox" name="include" checked={item.checked}
                    onChange={() => {
-                       state.checked = !state.checked;
-                       setState({...state});
-                       controls.include.callback(state);
+                       item.checked = !item.checked;
+                       setItems();
+                       controls.include.callback(item);
                    }} />
             }
     </span>)
-};
-
-export const useList = (init) => {
-    function listReducer(state, {action, data}) {
-        switch (action) {
-            case "reset": {
-                return init;
-            }
-            case "toggleExpand": {
-                data.expanded = !data.expanded;
-                return [...state];
-            }
-            case "toggleChecked": {
-                data.checked = !data.checked;
-                return [...state];
-            }
-            default:
-                return state;
-        }
-    }
-    const [items, modify] = useReducer(listReducer, init);
-
-    return {items, modify};
-};
-
-export const useItem = (init) => {
-    function itemReducer(state, {action, data}) {
-        switch (action) {
-            case "reset": {
-                return init;
-            }
-            case "toggleExpand": {
-                return {...state, expanded: !state.expanded};
-            }
-            case "toggleChecked": {
-                return {...state, checked: !state.checked};
-            }
-            default:
-                return state;
-        }
-    }
-    const [item, modify] = useReducer(itemReducer, init);
-
-    return {item, modify};
 };
