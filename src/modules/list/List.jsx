@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "./list.css"
+import "./list.css";
 
 export const List = ({listitems = [],
                          controls = {
@@ -10,6 +10,7 @@ export const List = ({listitems = [],
 
     const [items, setItems] = useState(listitems);
     useEffect(() => console.log({ list: items }),[items]);
+    useEffect(() => setItems(listitems),[listitems]);
 
     return (
         <ul className="list">
