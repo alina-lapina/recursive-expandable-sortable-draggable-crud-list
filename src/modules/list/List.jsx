@@ -7,6 +7,11 @@ export const List = ({listitems = [],
                              {name: "include", order: 1, callback: (i) => console.log("include", i.title)}
                          ]}) => {
 
+    function includeAll(item) {
+        item.checked = !item.checked;
+        item.children && item.children.forEach(i => includeAll(i));
+    }
+
     function listReducer(state, {action, data = {}}) {
         switch (action) {
             case "update": {
@@ -17,7 +22,7 @@ export const List = ({listitems = [],
                 return [...state];
             }
             case "toggle_include": {
-                data.checked = !data.checked;
+                includeAll(data);
                 return [...state];
             }
             default:
