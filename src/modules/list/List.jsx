@@ -12,11 +12,11 @@ export const List = ({listitems = [],
             case "update": {
                 return [...data];
             }
-            case "expand": {
+            case "toggle_expand": {
                 data.expanded = !data.expanded;
                 return [...state];
             }
-            case "include": {
+            case "toggle_include": {
                 data.checked = !data.checked;
                 return [...state];
             }
@@ -65,7 +65,7 @@ export const Controls = ({item, dispatch, controls}) => {
     return (
         <span>
             {controls.find(c => c.name === "expand") && item.children && item.children.length > 0 &&
-            <button onClick={() => dispatch({action: "expand", data: item})}
+            <button onClick={() => dispatch({action: "toggle_expand", data: item})}
             >{item.expanded ? "ᐃ" : "ᐁ"}
             </button>
             }
@@ -73,7 +73,7 @@ export const Controls = ({item, dispatch, controls}) => {
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
                    onChange={(e) => {
-                       dispatch({action: "include", data: item});
+                       dispatch({action: "toggle_include", data: item});
                        controls.find(c => c.name === "include").callback(item);
                    }} />
             }
