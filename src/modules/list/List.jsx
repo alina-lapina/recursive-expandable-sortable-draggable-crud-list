@@ -12,6 +12,10 @@ export const List = ({listitems = [],
         item.children && item.children.forEach(i => includeAll(i));
     }
 
+    function syncParent(item) {
+        
+    }
+
     function listReducer(state, {action, data = {}}) {
         switch (action) {
             case "update": {
@@ -23,12 +27,17 @@ export const List = ({listitems = [],
             }
             case "toggle_include": {
                 includeAll(data);
+                syncParent(data);
                 return [...state];
             }
             default:
                 return state;
     }}
 
+    function linkParent(item) {
+        item.children.forEach(child => child.parent = item);
+    }
+    listitems.forEach(item => linkParent(item));
     const [items, dispatch] = useReducer(listReducer, listitems);
     useEffect(() => console.log({ list: items }),[items]);
     useEffect(() => dispatch({action: "update", data: listitems}),[listitems]);
