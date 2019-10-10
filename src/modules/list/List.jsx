@@ -29,43 +29,43 @@ export const List = ({listitems = [],
     useEffect(() => dispatch({action: "update", data: listitems}),[listitems]);
 
     return (
-        <ListItems items={items} controls={controls} setItems={(o) => dispatch(o)} />
+        <ListItems items={items} controls={controls} dispatch={(o) => dispatch(o)} />
     )
 };
 
-export const ListItems = ({controls, items, setItems}) => {
+export const ListItems = ({controls, items, dispatch}) => {
     return (
         <ul className="list">
             {items.map((item, i) =>
-                <ListItem key={i} item={item} controls={controls} setItems={setItems} />)}
+                <ListItem key={i} item={item} controls={controls} dispatch={dispatch} />)}
         </ul>
     )
 };
 
-export const ListItem = ({controls, item, setItems}) => {
+export const ListItem = ({controls, item, dispatch}) => {
     return (
         <li>
             <Controls
                 item={item}
-                setItems={setItems}
+                dispatch={dispatch}
                 controls={controls.filter(control => control.order < 0)}
             />
             <span>{item.title}</span>
             <Controls
                 item={item}
-                setItems={setItems}
+                dispatch={dispatch}
                 controls={controls.filter(control => control.order > 0)}
             />
-            {item.expanded && <ListItems items={item.children} controls={controls} setItems={setItems} />}
+            {item.expanded && <ListItems items={item.children} controls={controls} dispatch={dispatch} />}
         </li>
     )
 };
 
-export const Controls = ({item, setItems, controls}) => {
+export const Controls = ({item, dispatch, controls}) => {
     return (
         <span>
             {controls.find(c => c.name === "expand") && item.children && item.children.length > 0 &&
-            <button onClick={() => setItems({action: "expand", data: item})}
+            <button onClick={() => dispatch({action: "expand", data: item})}
             >{item.expanded ? "ᐃ" : "ᐁ"}
             </button>
             }
@@ -73,7 +73,7 @@ export const Controls = ({item, setItems, controls}) => {
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
                    onChange={(e) => {
-                       setItems({action: "include", data: item});
+                       dispatch({action: "include", data: item});
                        controls.find(c => c.name === "include").callback(item);
                    }} />
             }
