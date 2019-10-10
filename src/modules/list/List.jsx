@@ -2,11 +2,10 @@ import React, {useState, useEffect} from "react";
 import "./list.css";
 
 export const List = ({listitems = [],
-                         controls = {
-                             expand: {before: true},
-                             include: {after: true,
-                                 callback: (i) => console.log("include", i.title)}}
-                     }) => {
+                         controls = [
+                             {name: "expand", order: -1},
+                             {name: "include", order: 1, callback: (i) => console.log("include", i.title)}
+                         ]}) => {
 
     const [items, setItems] = useState(listitems);
     useEffect(() => console.log({ list: items }),[items]);
@@ -33,14 +32,14 @@ export const ListItem = ({controls, item, setItems}) => {
         <li>
             <Controls
                 item={item}
-                setItems={(i)=> setItems(i)}
-                controls={filterControls("before")}
+                setItems={()=> setItems()}
+                controls={controls.filter(control => control.order < 0)}
             />
             <span>{item.title}</span>
             <Controls
                 item={item}
-                setItems={(i)=> setItems(i)}
-                controls={filterControls("after")}
+                setItems={()=> setItems()}
+                controls={controls.filter(control => control.order > 0)}
             />
             {item.expanded && <List listitems={item.children} controls={controls} />}
         </li>
@@ -50,20 +49,20 @@ export const ListItem = ({controls, item, setItems}) => {
 export const Controls = ({item, setItems, controls}) => {
     return (
         <span>
-            {controls.expand && item.children && item.children.length > 0 &&
+            {controls.find(c => c.name === "expand") && item.children && item.children.length > 0 &&
             <button onClick={() => {
                 item.expanded = !item.expanded;
-                setItems();}}>
-                {item.expanded ? "ᐃ" : "ᐁ"}
+                setItems();}}
+            >{item.expanded ? "ᐃ" : "ᐁ"}
             </button>
             }
 
-            {controls.include &&
+            {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
-                   onChange={() => {
+                   onChange={(e) => {
                        item.checked = !item.checked;
                        setItems();
-                       controls.include.callback(item);
+                       controls.find(c => c.name === "include").callback(item);
                    }} />
             }
     </span>)
