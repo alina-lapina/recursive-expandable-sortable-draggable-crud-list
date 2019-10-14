@@ -7,13 +7,12 @@ export const List = ({listitems = [],
                              {name: "include", order: 1, callback: (i) => console.log("include", i.title)}
                          ]}) => {
 
-    function includeAll(item) {
-        item.checked = !item.checked;
-        item.children && item.children.forEach(i => includeAll(i));
-    }
-
-    function syncParent(item) {
-        
+    function includeAll(item, value) {
+        item.checked = value || !item.checked;
+        // check parent -> check all children
+        item.checked && item.children && item.children.forEach(child => includeAll(child, true));
+        // uncheck parent: if all children are checked -> uncheck everybody
+        !item.checked && item.children && !item.children.find(child => !child.checked) && item.children.forEach(child => includeAll(child, false));
     }
 
     function listReducer(state, {action, data = {}}) {
@@ -27,7 +26,6 @@ export const List = ({listitems = [],
             }
             case "toggle_include": {
                 includeAll(data);
-                syncParent(data);
                 return [...state];
             }
             default:
@@ -86,7 +84,7 @@ export const Controls = ({item, dispatch, controls}) => {
 
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
-                   onChange={(e) => {
+                   onChange={() => {
                        dispatch({action: "toggle_include", data: item});
                        controls.find(c => c.name === "include").callback(item);
                    }} />
