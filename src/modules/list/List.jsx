@@ -8,7 +8,7 @@ export const List = ({listitems = [],
                              {name: "rank", order: 2}
                          ]}) => {
 
-    const [items, dispatch] = useList(listitems);
+    const {items, dispatch} = useList(listitems);
     useEffect(() => console.log({ list: items }),[items]);
     useEffect(() => dispatch({action: "update", data: listitems}),[listitems]);
 
@@ -88,6 +88,15 @@ export const useList = (list) => {
     list.length > 0 && list.forEach(item => linkParent(item));
     list.length > 0 && list.forEach((item, i) => item.rank = i+1);
 
+
+    function update(data) {
+        dispatch({ action: "update", data: data });
+    }
+
+    function remove(title) {
+        dispatch({action: "remove", data: title});
+    }
+
     function listReducer(state, {action, data = {}}) {
         switch (action) {
             case "update": {
@@ -104,8 +113,8 @@ export const useList = (list) => {
                 includeAll(data);
                 return [...state];
             }
-            case "rank": {
-                console.log("rank", data);
+            case "reorder": {
+                console.log("reorder", data);
                 data.item.rank = data.rank;
                 return [...state].sort((a,b) => (a.rank - b.rank));
             }
@@ -115,5 +124,5 @@ export const useList = (list) => {
 
     const [items, dispatch] = useReducer(listReducer, list);
 
-    return [items, dispatch];
+    return {items, dispatch, update, remove};
 };
