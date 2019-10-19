@@ -16,14 +16,14 @@ export const ListDemo = () => {
         },
         { title: 'Yrke', children:
                 [
-                    { title: '1 dfg' },
-                    { title: '2 xfdggfh' },
-                    { title: '3 xc' },
-                    { title: '4 dfgs' },
-                    { title: '5 salølæsødlfæsød' },
-                    { title: '6 Zzzsødlfæsød' },
+                    { title: 'dfg' },
+                    { title: 'xfdggfh' },
+                    { title: 'xc' },
+                    { title: 'dfgs' },
+                    { title: 'salølæsødlfæsød' },
+                    { title: 'Zzzsødlfæsød' },
                 ],
-            expanded: true
+            expanded: false
         },
         { title: 'Commune', children:
                 [

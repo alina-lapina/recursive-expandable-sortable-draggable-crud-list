@@ -4,7 +4,8 @@ import "./list.css";
 export const List = ({listitems = [],
                          controls = [
                              {name: "expand", order: -1},
-                             {name: "include", order: 1, callback: (i) => console.log("include", i.title)}
+                             {name: "include", order: 1, callback: (i) => console.log("include", i.title)},
+                             {name: "rank", order: 2}
                          ]}) => {
 
     const [items, dispatch] = useList(listitems);
@@ -55,9 +56,15 @@ export const Controls = ({item, dispatch, controls}) => {
 
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
-                   onChange={() => {
+                   onChange={(e) => {
                        dispatch({action: "toggle_include", data: item});
                        controls.find(c => c.name === "include").callback(item);
+                   }} />
+            }
+            {controls.find(c => c.name === "rank") &&
+            <input type="text" name="rank" value={item.rank}
+                   onChange={(e) => {
+                       dispatch({action: "rank", data: {item: item, rank: e.target.value}});
                    }} />
             }
     </span>)
@@ -79,6 +86,7 @@ export const useList = (list) => {
 
     // FIXME: it causes traverse fail because of the circular structure to JSON. use Proxy or array.find() instead
     list.length > 0 && list.forEach(item => linkParent(item));
+    list.length > 0 && list.forEach((item, i) => item.rank = i+1);
 
     function listReducer(state, {action, data = {}}) {
         switch (action) {
@@ -94,6 +102,11 @@ export const useList = (list) => {
             }
             case "toggle_include": {
                 includeAll(data);
+                return [...state];
+            }
+            case "rank": {
+                console.log("rank", data);
+                data.item.rank = data.rank;
                 return [...state];
             }
             default:
