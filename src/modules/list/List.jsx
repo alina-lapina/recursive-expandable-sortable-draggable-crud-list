@@ -56,13 +56,13 @@ export const Controls = ({item, dispatch, controls}) => {
 
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
-                   onChange={(e) => {
+                   onChange={() => {
                        dispatch({action: "toggle_include", data: item});
                        controls.find(c => c.name === "include").callback(item);
                    }} />
             }
             {controls.find(c => c.name === "rank") &&
-            <input type="text" name="rank" value={item.rank}
+            <input type="text" name="rank" size="5" value={item.rank}
                    onChange={(e) => {
                        dispatch({action: "rank", data: {item: item, rank: e.target.value}});
                    }} />
@@ -107,7 +107,7 @@ export const useList = (list) => {
             case "rank": {
                 console.log("rank", data);
                 data.item.rank = data.rank;
-                return [...state];
+                return [...state].sort((a,b) => (a.rank - b.rank));
             }
             default:
                 return state;
