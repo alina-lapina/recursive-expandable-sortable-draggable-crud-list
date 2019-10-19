@@ -13,7 +13,7 @@ export default function App() {
                         <div className="App-name">
                             <Link to="/">
                                 <img src={logo} className="App-logo" alt="Alina Lapina's avatar"/>
-                                Recursive expandable list view
+                                Recursive expandable checkable list view
                             </Link>
                         </div>
                     </header>
