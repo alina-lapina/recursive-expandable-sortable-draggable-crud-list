@@ -113,8 +113,7 @@ export const useList = (list) => {
                 includeAll(data);
                 return [...state];
             }
-            case "reorder": {
-                console.log("reorder", data);
+            case "rank": {
                 data.item.rank = data.rank;
                 return [...state].sort((a,b) => (a.rank - b.rank));
             }
