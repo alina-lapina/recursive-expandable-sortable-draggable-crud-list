@@ -65,6 +65,7 @@ export const Controls = ({item, dispatch, controls}) => {
             <input type="text" name="rank" size="5" value={item.rank}
                    onChange={(e) => {
                        dispatch({action: "rank", data: {item: item, rank: e.target.value}});
+
                    }} />
             }
     </span>)
@@ -113,9 +114,12 @@ export const useList = (list) => {
                 includeAll(data);
                 return [...state];
             }
+            // TODO: validate input -> only numbers
             case "rank": {
                 data.item.rank = data.rank;
-                return [...state].sort((a,b) => (a.rank - b.rank));
+                return data.rank === ""
+                    ? [...state]
+                    : [...state].sort((a,b) => (a.rank - b.rank));
             }
             default:
                 return state;
