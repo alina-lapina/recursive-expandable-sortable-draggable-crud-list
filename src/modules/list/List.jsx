@@ -63,6 +63,7 @@ export const Controls = ({item, dispatch, controls}) => {
             }
             {controls.find(c => c.name === "rank") &&
             <input type="number" name="rank" style={{width: "4em"}} value={item.rank}
+                   // FIXME do not returns a number on the 3d level, but text -> list becomes non-sortable!!!
                    onChange={(e) => {
                        dispatch({action: "rank", data: {item: item, rank: e.target.value}});
                    }} />
