@@ -90,8 +90,13 @@ function rank(item, i) {
     item.children && item.children.forEach((child, i) => rank(child, i));
 }
 
+function rerank(list) {
+    list.forEach((item, i) => item.rank = i + 1);
+}
+
 function reorder(list) {
-    list.sort((a,b) => (a.rank - b.rank));
+    list.sort((a,b) => (a.rank - b.rank - 1));
+    rerank(list);
 }
 
 export const useList = (list) => {
