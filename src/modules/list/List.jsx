@@ -62,10 +62,9 @@ export const Controls = ({item, dispatch, controls}) => {
                    }} />
             }
             {controls.find(c => c.name === "rank") &&
-            <input type="number" name="rank" size="5" value={item.rank}
+            <input type="number" name="rank" style={{width: "4em"}} value={item.rank}
                    onChange={(e) => {
                        dispatch({action: "rank", data: {item: item, rank: e.target.value}});
-
                    }} />
             }
     </span>)
