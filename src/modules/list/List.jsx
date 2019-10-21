@@ -76,18 +76,29 @@ function includeAll(item, value) {
     // check parent -> check all children
     item.checked && item.children && item.children.forEach(child => includeAll(child, true));
     // uncheck parent: if all children are checked -> uncheck everybody
-    !item.checked && item.children && !item.children.find(child => !child.checked) && item.children.forEach(child => includeAll(child, false));
+    !item.checked && item.children && !item.children.find(child => !child.checked)
+        && item.children.forEach(child => includeAll(child, false));
 }
 
 function linkParent(item) {
     item && item.children && item.children.forEach(child => child.parent = item);
 }
 
+function rank(item, i) {
+    if (!item) {return;}
+    item.rank = item.rank ? item.rank : i + 1;
+    item.children && item.children.forEach((child, i) => rank(child, i));
+}
+
+function reorder(list) {
+    list.sort((a,b) => (a.rank - b.rank));
+}
+
 export const useList = (list) => {
 
     // FIXME: it causes traverse fail because of the circular structure to JSON. use Proxy or array.find() instead
     list.length > 0 && list.forEach(item => linkParent(item));
-    list.length > 0 && list.forEach((item, i) => item.rank = i+1);
+    list.length > 0 && list.forEach((item, i) => rank(item, i));
 
 
     function update(data) {
@@ -117,9 +128,9 @@ export const useList = (list) => {
             // TODO: validate input -> only numbers
             case "rank": {
                 data.item.rank = data.rank;
-                return data.rank === ""
-                    ? [...state]
-                    : [...state].sort((a,b) => (a.rank - b.rank));
+                data.rank !== "" && data.rank !== "-"
+                    && reorder(data.item.parent ? data.item.parent.children : state);
+                return [...state];
             }
             default:
                 return state;

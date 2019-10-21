@@ -11,7 +11,7 @@ export const ListDemo = () => {
                     { title: 'B xfdggfh' },
                     { title: 'C xc' },
                     { title: 'D dfgs' },
-                    { title: 'E salølæsødlfæsød' },
+                    { title: 'E salølæsødlfæsød' }
                 ]
         },
         { title: 'Yrke', children:
@@ -21,7 +21,26 @@ export const ListDemo = () => {
                     { title: 'xc' },
                     { title: 'dfgs' },
                     { title: 'salølæsødlfæsød' },
-                    { title: 'Zzzsødlfæsød' },
+                    { title: 'Zzzsødlfæsød' }
+                ],
+            expanded: false
+        },
+        { title: 'Kommune', children:
+                [
+                    { title: 'Oslo' },
+                    { title: 'Akershus' },
+                    { title: 'Fet' },
+                    { title: 'En' },
+                    { title: 'To' },
+                    { title: 'Tre' }
+                ],
+            expanded: false
+        },
+        { title: 'Fylke', children:
+                [
+                    { title: 'Oslo' },
+                    { title: 'Nord Norge' },
+                    { title: 'Østland' }
                 ],
             expanded: false
         },
@@ -43,7 +62,7 @@ export const ListDemo = () => {
                                 { title: 'E salølæsødlfæsød' },
                             ]},
                     { title: 'IX Pjfklsvnnn' },
-                    { title: 'X AKOKO' },
+                    { title: 'X AKOKO' }
                 ]
         },
     ];
