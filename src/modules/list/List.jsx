@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer} from "react";
+import { ReactComponent as Hamburger } from "../../images/hamburger.svg";
 import "./list.css";
 
 export const List = ({listitems = [],
@@ -26,15 +27,56 @@ export const ListItems = ({controls, items, dispatch}) => {
     )
 };
 
+const onDragStart = (e, item) => {
+    item.dragged = true;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", e.target.parentNode);
+    e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+};
+
+const onDragOver = item => {
+    // const draggedOverItem = this.state.items[index];
+
+    // if the item is dragged over itself, ignore
+    //if (this.draggedItem === draggedOverItem) {return;}
+
+    // filter out the currently dragged item
+    //let items = this.state.items.filter(item => item !== this.draggedItem);
+
+    // add the dragged item after the dragged over item
+    //items.splice(index, 0, this.draggedItem);
+
+    //this.setState({ items });
+    console.log("onDragOver", item.title);
+};
+
+const onDragEnd = (dispatch) => {
+    console.log("onDragEnd");
+
+    //this.draggedIdx = null;
+};
+
 export const ListItem = ({controls, item, dispatch}) => {
     return (
-        <li>
+        <li  onDragOver={() => {
+            console.log("onDragOver", item.title);
+            dispatch({action: "rank_dragged", data: {rank: item.rank}});
+        }}>
+            <div
+                className="drag"
+                draggable
+                onDragStart={e => onDragStart(e, item)}
+                onDragEnd={() => onDragEnd(item)}
+                style={{border: "red"}}
+            >
+                &#9776;
+            </div>
+            <span className="content">{item.title}</span>
             <Controls
                 item={item}
                 dispatch={dispatch}
                 controls={controls.filter(control => control.order < 0)}
             />
-            <span>{item.title}</span>
             <Controls
                 item={item}
                 dispatch={dispatch}
@@ -134,6 +176,11 @@ export const useList = (list) => {
                 data.item.rank = data.rank;
                 data.rank !== "" && data.rank !== "-"
                     && reorder(data.item.parent ? data.item.parent.children : state);
+                return [...state];
+            }
+            case "rank_dragged": {
+                state.find(item => item.dragged).rank = data.rank;
+                reorder(state);
                 return [...state];
             }
             default:
