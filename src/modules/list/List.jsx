@@ -31,7 +31,7 @@ export const ListItem = ({controls, item, dispatch}) => {
         <li style={{background: item.dragged ? "lightblue" : "white"}}
             className="drag" draggable
             onDragOver={() => dispatch({action: "item_dragOver", data: item})}
-            onDragStart={(e) => dispatch({action: "item_dragged", data: item})}
+            onDragStart={() => dispatch({action: "item_dragged", data: item})}
             onDragEnd={() => dispatch({action: "item_dropped", data: item})}
         >
             <Controls
@@ -40,7 +40,9 @@ export const ListItem = ({controls, item, dispatch}) => {
                 controls={controls.filter(control => control.order < 0)}
             />
 
-            <span className="content">{item.title}</span>
+            <span className="content"
+                  onClick={() => dispatch({action: "item_toggle_dragged", data: item})}
+            >{item.title}</span>
 
             <Controls
                 item={item}
@@ -144,7 +146,9 @@ export const useList = (list) => {
                 return [...state];
             }
             case "item_dragOver": {
-                state.find(item => item.dragged).rank = data.rank;
+                //state.find(item => item.dragged).rank = data.rank;
+                state.filter(item => item.dragged)
+                    .forEach(item => item.rank = data.rank);
                 reorder(state);
                 return [...state];
             }
@@ -153,7 +157,12 @@ export const useList = (list) => {
                 return [...state];
             }
             case "item_dropped": {
-                state.find(item => item.dragged).dragged = false;
+                //state.find(item => item.dragged).dragged = false;
+                state.filter(item => item.dragged).forEach(item => item.dragged = false);
+                return [...state];
+            }
+            case "item_toggle_dragged": {
+                data.dragged = !data.dragged;
                 return [...state];
             }
             default:
