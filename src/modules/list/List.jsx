@@ -146,7 +146,6 @@ export const useList = (list) => {
                 return [...state];
             }
             case "item_dragOver": {
-                //state.find(item => item.dragged).rank = data.rank;
                 state.filter(item => item.dragged)
                     .forEach(item => item.rank = data.rank);
                 reorder(state);
@@ -157,7 +156,6 @@ export const useList = (list) => {
                 return [...state];
             }
             case "item_dropped": {
-                //state.find(item => item.dragged).dragged = false;
                 state.filter(item => item.dragged).forEach(item => item.dragged = false);
                 return [...state];
             }
