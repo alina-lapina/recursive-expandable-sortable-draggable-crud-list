@@ -151,16 +151,18 @@ export const useList = (list) => {
                 reorder(state);
                 return [...state];
             }
+            // TODO: item_dragged and item_toggle_dragged are same?
             case "item_dragged": {
                 data.dragged = true;
                 return [...state];
             }
-            case "item_dropped": {
-                state.filter(item => item.dragged).forEach(item => item.dragged = false);
-                return [...state];
-            }
             case "item_toggle_dragged": {
                 data.dragged = !data.dragged;
+                return [...state];
+            }
+            case "item_dropped": {
+                state.filter(item => item.dragged)
+                    .forEach(item => item.dragged = false);
                 return [...state];
             }
             default:
