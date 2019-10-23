@@ -30,9 +30,9 @@ export const ListItem = ({controls, item, dispatch}) => {
     return (
         <li style={{background: item.dragged ? "lightblue" : "white"}}
             className="drag" draggable
-            onDragOver={() => dispatch({action: "item_dragOver", data: item})}
-            onDragStart={() => dispatch({action: "item_dragged", data: item})}
-            onDragEnd={() => dispatch({action: "item_dropped", data: item})}
+            onDragOver={() => dispatch({action: "dragOver", data: item})}
+            onDragStart={() => dispatch({action: "dragged", data: item})}
+            onDragEnd={() => dispatch({action: "dropped", data: item})}
         >
             <Controls
                 item={item}
@@ -41,7 +41,7 @@ export const ListItem = ({controls, item, dispatch}) => {
             />
 
             <span className="content"
-                  onClick={() => dispatch({action: "item_toggle_dragged", data: item})}
+                  onClick={() => dispatch({action: "toggle_dragged", data: item})}
             >{item.title}</span>
 
             <Controls
@@ -145,22 +145,22 @@ export const useList = (list) => {
                     && reorder(data.item.parent ? data.item.parent.children : state);
                 return [...state];
             }
-            case "item_dragOver": {
+            case "dragOver": {
                 state.filter(item => item.dragged)
                     .forEach(item => item.rank = data.rank);
                 reorder(state);
                 return [...state];
             }
             // TODO: item_dragged and item_toggle_dragged are same?
-            case "item_dragged": {
+            case "dragged": {
                 data.dragged = true;
                 return [...state];
             }
-            case "item_toggle_dragged": {
+            case "toggle_dragged": {
                 data.dragged = !data.dragged;
                 return [...state];
             }
-            case "item_dropped": {
+            case "dropped": {
                 state.filter(item => item.dragged)
                     .forEach(item => item.dragged = false);
                 return [...state];
