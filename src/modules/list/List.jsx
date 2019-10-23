@@ -1,5 +1,4 @@
 import React, {useEffect, useReducer} from "react";
-import { ReactComponent as Hamburger } from "../../images/hamburger.svg";
 import "./list.css";
 
 export const List = ({listitems = [],
@@ -30,29 +29,19 @@ export const ListItems = ({controls, items, dispatch}) => {
 export const ListItem = ({controls, item, dispatch}) => {
     return (
         <li style={{background: item.dragged ? "lightblue" : "white"}}
-            onDragOver={() => {
-            //console.log("onDragOver", item.title);
-            dispatch({action: "item_dragOver", data: {rank: item.rank}});
-        }}>
-            <div
-                className="drag"
-                draggable
-                onDragStart={() => {
-                    console.log("onDragStart", item.title);
-                    dispatch({action: "item_dragged", data: {item: item}});
-                }}
-                onDragEnd={() => {
-                    console.log("onDragEnd", item.title);
-                    dispatch({action: "item_dropped", data: {item: item}});
-                }}
-            >&#9776;
-            </div>
-            <span className="content">{item.title}</span>
+            className="drag" draggable
+            onDragOver={() => dispatch({action: "item_dragOver", data: item})}
+            onDragStart={(e) => dispatch({action: "item_dragged", data: item})}
+            onDragEnd={() => dispatch({action: "item_dropped", data: item})}
+        >
             <Controls
                 item={item}
                 dispatch={dispatch}
                 controls={controls.filter(control => control.order < 0)}
             />
+
+            <span className="content">{item.title}</span>
+
             <Controls
                 item={item}
                 dispatch={dispatch}
@@ -68,7 +57,7 @@ export const Controls = ({item, dispatch, controls}) => {
         <span>
             {controls.find(c => c.name === "expand") && item.children && item.children.length > 0 &&
             <button onClick={() => dispatch({action: "toggle_expand", data: item})}
-            >{item.expanded ? "ᐃ" : "ᐁ"}
+            >{item.expanded ? <span >&#9652;</span> : <span>&#9662;</span>}
             </button>
             }
 
@@ -154,13 +143,13 @@ export const useList = (list) => {
                     && reorder(data.item.parent ? data.item.parent.children : state);
                 return [...state];
             }
-            case "item_dragged": {
-                data.item.dragged = true;
-                return [...state];
-            }
             case "item_dragOver": {
                 state.find(item => item.dragged).rank = data.rank;
                 reorder(state);
+                return [...state];
+            }
+            case "item_dragged": {
+                data.dragged = true;
                 return [...state];
             }
             case "item_dropped": {
