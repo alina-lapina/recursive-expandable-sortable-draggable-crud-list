@@ -5,6 +5,7 @@ export const List = ({listitems = [],
                          controls = [
                              {name: "expand", order: -1},
                              {name: "include", order: 1, callback: (i) => console.log("include", i.title)},
+                             {name: "draggable"},
                              {name: "rank", order: 2}
                          ]}) => {
 
@@ -29,7 +30,7 @@ export const ListItems = ({controls, items, dispatch}) => {
 export const ListItem = ({controls, item, dispatch}) => {
     return (
         <li style={{background: item.dragged ? "lightblue" : "white"}}
-            className="drag" draggable
+            className="drag" draggable={!!controls.find(c => c.name === "draggable") }
             onDragOver={() => dispatch({action: "dragOver", data: item})}
             onDragStart={() => dispatch({action: "dragged", data: item})}
             onDragEnd={() => dispatch({action: "dropped", data: item})}
