@@ -13,13 +13,13 @@ export default function App() {
                         <div className="App-name">
                             <Link to="/">
                                 <img src={logo} className="App-logo" alt="Alina Lapina's avatar"/>
-                                Recursive expandable checkable sortable list view
+                                Recursive expandable checkable sortable draggable list view
                             </Link>
                         </div>
                     </header>
                     <Switch>
                         <Route path="/" exact component={WelcomePage}/>
-                        <Route path="/expandable" exact component={ListDemo}/>
+                        <Route path="/demo" exact component={ListDemo}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </div>

@@ -16,7 +16,7 @@ export default function WelcomePage() {
                 >GitHub repository</a>
             </p>
 
-            <button><Link to="/expandable">Show a list</Link></button>
+            <button><Link to="/demo">Show a list</Link></button>
         </div>
     );
 }
