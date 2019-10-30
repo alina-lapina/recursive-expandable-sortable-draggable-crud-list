@@ -4,7 +4,7 @@ import "./list.css";
 export const List = ({listitems = [],
                          controls = [
                              {name: "expand", order: -1},
-                             {name: "include", order: 1, callback: (i) => console.log("include", i.title)},
+                             {name: "include", order: 1, callback: (i) => console.log("-----------checkbox", i.title)},
                              {name: "draggable"},
                              {name: "rank", order: 2}
                          ]}) => {
@@ -66,8 +66,8 @@ export const Controls = ({item, dispatch, controls}) => {
 
             {controls.find(c => c.name === "include") &&
             <input type="checkbox" name="include" checked={item.checked}
-                   onChange={() => {
-                       dispatch({action: "toggle_include", data: item});
+                   onChange={(e) => {
+                       dispatch({action: "toggle_include", data: {item: item, checked: !item.checked }});
                        controls.find(c => c.name === "include").callback(item);
                    }} />
             }
@@ -81,23 +81,37 @@ export const Controls = ({item, dispatch, controls}) => {
     </span>)
 };
 
-function includeAll(item, value) {
-    item.checked = value || !item.checked;
+function include(item) {
+    console.log("include", item.title);
+    item.checked = true;
     // check parent -> check all children
-    item.checked && item.children && item.children.forEach(child => includeAll(child, true));
+    item.children && item.children.filter(i => !i.checked) .forEach(child => include(child));
+    // if all children now checked -> check the parent
+    item.parent && !item.parent.children.find(i => !i.checked) && include(item.parent);
+}
+
+function exclude(item) {
+    console.log("exclude", item.title);
+    item.checked =false;
+    // uncheck child -> uncheck parent
+    item.parent && exclude(item.parent);
     // uncheck parent: if all children are checked -> uncheck everybody
-    !item.checked && item.children && !item.children.find(child => !child.checked)
-        && item.children.forEach(child => includeAll(child, false));
+    item.children && !item.children.find(child => !child.checked)
+    && item.children.forEach(child => exclude(child));
 }
 
 function linkParent(item) {
-    item && item.children && item.children.forEach(child => child.parent = item);
+    if (!item || !item.children) {return;}
+    item.children.forEach(child => {
+        child.parent = item;
+        linkParent(child);
+    });
 }
 
 function rank(item, i) {
     if (!item) {return;}
     item.rank = item.rank ? item.rank : i + 1;
-    item.children && item.children.forEach((child, i) => rank(child, i));
+    item.children && item.children.forEach((child, j) => rank(child, j));
 }
 
 function rerank(list) {
@@ -137,7 +151,8 @@ export const useList = (list) => {
                 return [...state];
             }
             case "toggle_include": {
-                includeAll(data);
+                console.log("toggle_include", data.checked);
+                data.checked ? include(data.item) : exclude(data.item);
                 return [...state];
             }
             case "rank": {
