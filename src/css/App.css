@@ -27,3 +27,22 @@
   padding-right: 30px;
 }
 
+.App ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.App ul li {
+  padding: 5px 10px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.App li .drag {
+  margin-right: 15px;
+  cursor: move;
+}
+
